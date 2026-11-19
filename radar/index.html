@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Offline radar showing distance and direction to other Trek Buddy pendants.">
+  <title>Trek Buddy Radar</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="sticky">
+    <header class="topbar">
+      <div class="conn">
+        <span id="conn-dot" class="dot" data-state="idle"></span>
+        <div class="conn-lines">
+          <div id="conn-text" class="conn-text">Not connected</div>
+          <div id="me-text" class="sub">Me: waiting for GPS…</div>
+        </div>
+      </div>
+      <button id="connect-btn" class="btn primary" type="button">Connect</button>
+    </header>
+    <section id="sos-banner" class="sos-banner" hidden aria-live="assertive"></section>
+  </div>
+
+  <main>
+    <section class="radar-wrap">
+      <canvas id="radar" role="img" aria-label="Radar showing other trekkers around you"></canvas>
+      <button id="compass-hint" class="hint" type="button">Looking for compass…</button>
+    </section>
+
+    <p id="empty" class="empty">No trekkers heard yet. Connect your pendant: other trekkers appear here as soon as their pendants report in.</p>
+    <section id="cards" class="cards" aria-label="Trekkers"></section>
+
+    <footer class="footer">
+      <div id="stats" class="stats"></div>
+      <div class="footer-actions">
+        <button id="clear-btn" class="btn small" type="button">Clear list</button>
+        <a id="demo-link" class="btn small" href="?demo=1">Demo mode</a>
+      </div>
+    </footer>
+  </main>
+
+  <div class="sos-dock">
+    <button id="my-sos" class="my-sos" type="button" disabled>
+      <span id="my-sos-label">Connect pendant to use SOS</span>
+    </button>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <template id="card-tpl">
+    <article class="card">
+      <header class="card-head">
+        <h2 class="name"></h2>
+        <div class="badges"></div>
+      </header>
+      <div class="main">
+        <div class="arrow-wrap" aria-hidden="true">
+          <svg class="arrow" viewBox="0 0 100 100"><path d="M50 4 L84 90 L50 70 L16 90 Z"/></svg>
+        </div>
+        <div class="dist-block">
+          <div class="dist"></div>
+          <div class="dir"></div>
+        </div>
+      </div>
+      <dl class="meta">
+        <div><dt>Seen</dt><dd class="seen"></dd></div>
+        <div><dt>Battery</dt><dd class="batt"></dd></div>
+        <div><dt>Hops</dt><dd class="hops"></dd></div>
+        <div><dt>Signal</dt><dd><span class="bars" role="img"><i></i><i></i><i></i><i></i></span></dd></div>
+      </dl>
+      <p class="note" hidden></p>
+      <div class="actions">
+        <a class="btn maps">Open in Organic Maps</a>
+        <button class="btn copy" type="button">Copy coordinates</button>
+      </div>
+      <details class="trail">
+        <summary></summary>
+        <ol></ol>
+      </details>
+    </article>
+  </template>
+</body>
+</html>

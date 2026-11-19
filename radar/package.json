@@ -1,0 +1,11 @@
+{
+  "name": "trek-buddy-radar",
+  "private": true,
+  "description": "Offline PWA radar for Trek Buddy LoRa pendants (no dependencies, no build step)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "smoke": "node tests/smoke.mjs",
+    "icons": "node tools/make-icons.mjs"
+  }
+}

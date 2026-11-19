@@ -1,0 +1,8 @@
+# Office lock files
+~$*
+# Local tool / editor folders
+.claude/
+.vscode/
+node_modules/
+Thumbs.db
+.DS_Store
